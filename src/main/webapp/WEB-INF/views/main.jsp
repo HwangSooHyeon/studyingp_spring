@@ -4,11 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>테스트</title>
+<title>메인</title>
 </head>
 <body>
-	브랜치 테스트 중입니다
-	아무거나 입력
-	아무거나 바꿈
+	<p>메인 화면 입니다.</p>
 </body>
 </html>
