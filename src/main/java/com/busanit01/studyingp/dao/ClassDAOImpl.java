@@ -16,58 +16,58 @@ public class ClassDAOImpl implements ClassDAO{
 	
 	@Override
 	public List<ClassDTO> selectCls() {
-		return sqlSession.selectList("selectCls");
+		return sqlSession.selectList("mappers.ClassMapper.selectCls");
 	}
 
 	@Override
 	public List<ClassDTO> selectClsAll() {
-		return sqlSession.selectList("selectAll");
+		return sqlSession.selectList("mappers.ClassMapper.selectAll");
 	}
 
 	@Override
 	public List<ClassDTO> selectClsDel() {
-		return sqlSession.selectList("selectDel");
+		return sqlSession.selectList("mappers.ClassMapper.selectDel");
 	}
 
 	@Override
 	public List<ClassDTO> selectClsCategory(ClassDTO classDto) {
-		return sqlSession.selectList("selectClsCategory");
+		return sqlSession.selectList("mappers.ClassMapper.selectClsCategory");
 	}
 
 	@Override
 	public List<ClassDTO> selectClsName(ClassDTO classDto) {
-		return sqlSession.selectList("selectClsName");
+		return sqlSession.selectList("mappers.ClassMapper.selectClsName");
 	}
 
 	@Override
 	public List<ClassDTO> selectClsInst(ClassDTO classDto) {
-		return sqlSession.selectList("selectClsInst");
+		return sqlSession.selectList("mappers.ClassMapper.selectClsInst");
 	}
 
 	@Override
 	public int insertCls(ClassDTO classDto) {
-		int result = sqlSession.insert("insertCls", classDto);
+		int result = sqlSession.insert("mappers.ClassMapper.insertCls", classDto);
 		sqlSession.commit();
 		return result;
 	}
 
 	@Override
 	public int updateCls(ClassDTO classDto) {
-		int result = sqlSession.update("updateCls", classDto);
+		int result = sqlSession.update("mappers.ClassMapper.updateCls", classDto);
 		sqlSession.commit();
 		return result;
 	}
 
 	@Override
 	public int deleteCls(ClassDTO classDto) {
-		int result = sqlSession.update("deleteCls", classDto);
+		int result = sqlSession.update("mappers.ClassMapper.deleteCls", classDto);
 		sqlSession.commit();
 		return result;
 	}
 
 	@Override
 	public ClassDTO selectClsCode(ClassDTO classDto) {
-		return sqlSession.selectOne("selectClsCode", classDto);
+		return sqlSession.selectOne("mappers.ClassMapper.selectClsCode", classDto);
 	}
 	
 }
