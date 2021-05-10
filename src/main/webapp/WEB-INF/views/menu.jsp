@@ -51,8 +51,8 @@
 				</a>
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="#">회원 정보 수정</a> <br> <a
-							class="dropdown-item" href="#">장바구니</a> <a
-							class="dropdown-item" href="#">수강 정보</a>
+							class="dropdown-item" href="#">장바구니</a> <a class="dropdown-item"
+							href="#">수강 정보</a>
 					</div>
 				</li>
 			</ul>

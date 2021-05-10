@@ -9,17 +9,20 @@
 
 <%@ include file="settings/csssetting.jsp"%>
 
+<script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var responseMessage = "${params.msg}";
+	
+	if(responseMessage != ""){
+		alert(responseMessage);}
+});
+</script>
+
 </head>
 <body>
 	<!-- Menu -->
 	<%@ include file="menu.jsp"%>
-	
-	<p>${header.referer}</p>
-	
-	<script type="text/javascript">
-	if(${userInfo == null} && (${header.referer} == "http://localhost/goLogin" || ${header.referer} == "http://localhost/signIn")){
-		alert("존재하지 않는 계정입니다.");}
-	</script>
 	
 	<div class="container" align="center">
 		<div class="row">
