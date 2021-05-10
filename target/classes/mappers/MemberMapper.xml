@@ -87,6 +87,19 @@
 	
 	</select>
 
+	<!-- 로그인 -->
+	<select id="signIn" parameterType="com.busanit01.studyingp.dto.MemberDTO" resultType="com.busanit01.studyingp.dto.MemberDTO">
+	
+		SELECT
+			*
+		FROM
+			MEMBERTBL
+		WHERE
+			MEM_ID = #{mem_id} AND
+			MEM_PW = #{mem_pw} AND
+			MEM_STATUS = 1	
+	
+	</select>
 	
 	<!-- 회원 가입 -->
 	<insert id="insertMem" parameterType="com.busanit01.studyingp.dto.MemberDTO">

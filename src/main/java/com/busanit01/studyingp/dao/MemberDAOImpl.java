@@ -67,6 +67,10 @@ public class MemberDAOImpl implements MemberDAO{
 		sqlSession.commit();
 		return result;
 	}
+	@Override
+	public MemberDTO signIn(MemberDTO memberDto) throws Exception{
+		return sqlSession.selectOne("mappers.MemberMapper.signIn", memberDto);
+	}
 	
 	
 }

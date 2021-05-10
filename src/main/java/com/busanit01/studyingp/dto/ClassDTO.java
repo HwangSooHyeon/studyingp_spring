@@ -26,5 +26,6 @@ public class ClassDTO {
 	private Date cls_period;
 	private int cls_delete;
 	private String cls_content;
+	private String cls_img;
 }
 

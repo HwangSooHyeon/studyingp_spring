@@ -37,7 +37,7 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 	@Override
 	public List<BoardDTO> selectBrdContent(BoardDTO boardDto) {
-		return sqlSession.selectList("mappers.BoardMapper.selectBrdCotent");
+		return sqlSession.selectList("mappers.BoardMapper.selectBrdContent");
 	}
 	@Override
 	public List<BoardDTO> selectBrdClsCode(BoardDTO boardDto) {

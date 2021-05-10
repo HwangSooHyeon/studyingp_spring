@@ -20,7 +20,9 @@ public interface MemberDAO {
 	public MemberDTO selectMemName(MemberDTO memberDto);
 	// 권한검색
 	public List<MemberDTO> selectMemAccess(MemberDTO memberDto);
-
+	
+	// 로그인
+	public MemberDTO signIn(MemberDTO memberDto) throws Exception;	
 	//회원가입
 	public int insertMem(MemberDTO memberDto);
 	//정보수정

@@ -96,9 +96,9 @@
 	<insert id="insertCls" parameterType="com.busanit01.studyingp.dto.ClassDTO">
 	
 		INSERT INTO
-			CLASSTBL (CLS_CATEGORY, CLS_NAME, MEM_CODE, CLS_PRICE, CLS_TIME, CLS_PERIOD, CLS_DELETE, CLS_CONTENT) 
+			CLASSTBL (CLS_CATEGORY, CLS_NAME, MEM_CODE, CLS_PRICE, CLS_TIME, CLS_PERIOD, CLS_DELETE, CLS_CONTENT, CLS_IMG) 
 		VALUES
-			(#{cls_category}, #{cls_name}, #{mem_code}, #{cls_price}, #{cls_time}, DATE_ADD(NOW(), INTERVAL 6 MONTH), 1, #{cls_content})
+			(#{cls_category}, #{cls_name}, #{mem_code}, #{cls_price}, #{cls_time}, DATE_ADD(NOW(), INTERVAL 6 MONTH), 1, #{cls_content}, #{cls_img})
 	
 	</insert>
 	
@@ -115,6 +115,7 @@
 			CLS_TIME = #{cls_time},
 			CLS_PERIOD = #{cls_period},
 			CLS_CONTENT = #{cls_content}
+			CLS_IMG = #{cls_img}
 		WHERE
 			CLS_CODE = #{cls_code}
 	
