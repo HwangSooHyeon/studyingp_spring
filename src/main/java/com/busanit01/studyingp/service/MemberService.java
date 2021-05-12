@@ -15,4 +15,9 @@ public class MemberService {
 	public MemberDTO signIn(MemberDTO memberDTO) throws Exception {		
 		return memDAO.signIn(memberDTO);
 	}
+	
+	// 회원가입 메소드
+	public int signUp(MemberDTO memberDTO) throws Exception {
+		return memDAO.insertMem(memberDTO);
+	}
 }

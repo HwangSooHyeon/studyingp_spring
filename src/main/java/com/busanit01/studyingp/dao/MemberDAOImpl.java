@@ -45,27 +45,19 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 	@Override
 	public int insertMem(MemberDTO memberDto) {
-		int result = sqlSession.insert("mappers.MemberMapper.insertMem", memberDto);
-		sqlSession.commit();
-		return result;
+		return sqlSession.insert("mappers.MemberMapper.insertMem", memberDto);
 	}
 	@Override
 	public int updateMem(MemberDTO memberDto) {
-		int result = sqlSession.update("mappers.MemberMapper.updateMem", memberDto);
-		sqlSession.commit();
-		return result;
+		return sqlSession.update("mappers.MemberMapper.updateMem", memberDto);
 	}
 	@Override
 	public int deleteMem(MemberDTO memberDto) {
-		int result = sqlSession.update("mappers.MemberMapper.deleteMem", memberDto);
-		sqlSession.commit();
-		return result;
+		return sqlSession.update("mappers.MemberMapper.deleteMem", memberDto);
 	}
 	@Override
 	public int updateMemAccess(MemberDTO memberDto) {
-		int result = sqlSession.update("mappers.MemberMapper.updateMemAccess", memberDto);
-		sqlSession.commit();
-		return result;
+		return sqlSession.update("mappers.MemberMapper.updateMemAccess", memberDto);
 	}
 	@Override
 	public MemberDTO signIn(MemberDTO memberDto) throws Exception{

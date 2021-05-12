@@ -10,8 +10,6 @@
 
 <%@ include file="settings/csssetting.jsp"%>
 
-<script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
-
 </head>
 <body>
 	<!-- Menu -->
@@ -30,15 +28,14 @@
 						<div class="col-lg-4 col-md-6 mb-4">
 							<div class="card h-100">
 								<a href="#"><img class="card-img-top"
-									src="./resources/img/${item.cls_img }" alt=""></a>
+									src="./resources/img/${item.cls_img}" alt=""></a>
 								<div class="card-body">
 									<h4 class="card-title">
 										<a href="/goClsInfo?clsCode=${item.cls_code}"
 											style="color: black">${item.cls_name}</a>
 									</h4>
 									<h5>
-										<fmt:formatNumber value="${item.cls_price}" type="number" />
-										원
+										<fmt:formatNumber value="${item.cls_price}" type="number" /> 원
 									</h5>
 									<p class="card-text">${item.cls_content}</p>
 								</div>

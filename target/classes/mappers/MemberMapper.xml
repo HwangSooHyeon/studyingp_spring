@@ -96,7 +96,6 @@
 			MEMBERTBL
 		WHERE
 			MEM_ID = #{mem_id} AND
-			MEM_PW = #{mem_pw} AND
 			MEM_STATUS = 1	
 	
 	</select>

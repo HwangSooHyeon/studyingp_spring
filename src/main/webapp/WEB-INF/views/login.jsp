@@ -9,7 +9,6 @@
 
 <%@ include file="settings/csssetting.jsp"%>
 
-<script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	var responseMessage = "${params.msg}";
@@ -47,7 +46,7 @@ $(document).ready(function(){
 					<div class="notact my-4" align="left">
 						<p>아직 계정이 없으신가요?</p>
 						<button class="btn btn-lg btn-primary btn-block"
-							onclick="location.href='signup.jsp'"
+							onclick="location.href='/goSignUp'"
 							style="background-color: white; color: black; border: 2px solid black; padding: 14px 5px">
 							회원가입</button>
 					</div>

@@ -10,7 +10,7 @@
 
 <%@ include file="settings/csssetting.jsp"%>
 </head>
-<script type="text/javascript"></script>
+
 <body>
 	<!-- Menu -->
 	<%@ include file="menu.jsp"%>

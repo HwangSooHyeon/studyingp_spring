@@ -1,3 +1,4 @@
+<%@ include file="settings/taglibsetting.jsp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!-- 네비바 -->
@@ -30,21 +31,38 @@
 					class="dropdown-item" href="#">자유</a>
 			</div>
 		</li>
-
-
 		<div class="collapse navbar-collapse" id="navbarResponsive"
 			style="text: center">
 			<ul class="navbar-nav ml-auto">
-				<!--      
-		  <li class="nav-item active">
-            <a class="nav-link" href="#">GUEST님
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-        -->
-				<li class="nav-item"><a class="nav-link" href="/goLogin">로그인</a>
+				<c:set var = "username" value="${currentUser.mem_id}"></c:set>
+				<c:set var = "access" value="${currentUser.mem_access}"></c:set>
+				
+				<c:choose>
+					<c:when test="${username != null}">
+						<li class="nav-item active">
+							<a class="nav-link" href="#">${username}님</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/signOut">로그아웃</a>
+						</li>	
+					</c:when>
+					<c:otherwise>
+						<li class="nav-item active">
+							<a class="nav-link" href="#">GUEST님	</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/goLogin">로그인</a>
+						</li>						
+					</c:otherwise>				
+				</c:choose>
+				<!-- <li class="nav-item active">
+					<a class="nav-link" href="#">GUEST님	</a>
+				</li> -->
 
-				</li>
+				<!-- <li class="nav-item">
+					<a class="nav-link" href="/goLogin">로그인</a>
+				</li> -->
+				
 				<li class="nav-item dropdown navbar-dark" style="list-style: none;">
 					<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
 					style="color: #fff"> <i class="fas fa-user-circle"></i>
