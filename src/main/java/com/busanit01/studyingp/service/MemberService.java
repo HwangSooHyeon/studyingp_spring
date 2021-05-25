@@ -20,4 +20,9 @@ public class MemberService {
 	public int signUp(MemberDTO memberDTO) throws Exception {
 		return memDAO.insertMem(memberDTO);
 	}
+	
+	// 아이디 중복 체크 메소드
+	public int idChk(MemberDTO memberDTO) throws Exception{
+		return memDAO.idChk(memberDTO);
+	}
 }

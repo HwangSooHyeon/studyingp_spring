@@ -1,104 +1,17 @@
 <%@ include file="settings/taglibsetting.jsp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
-
 <%@ include file="settings/metasetting.jsp"%>
 
-<title>Studying P - Sign Up</title>
+<title>Studying P - MyPage</title>
 
 <%@ include file="settings/csssetting.jsp"%>
 
-<script type="text/javascript">
-$(document).ready(function(){
-	var responseMessage = "${params.msg}";
-	
-	if(responseMessage != ""){
-		alert(responseMessage);
-	}	
-});
-
-function idChk(){
-	$.ajax({
-		url : "/idChk",
-		type : "POST",
-		dataType : "json",
-		data : {mem_id : $("#mem_id").val()},
-		success : function(data){
-			if(data == 1){
-				alert("중복된 아이디입니다.");
-			}else if(data == 0){
-				alert("사용 가능한 아이디입니다.");
-			}
-		}
-	});
-}
-
-function chkSignUp(){
-	var form = document.signUpForm;
-	
-	var regExpId = /^[a-zA-Z0-9]{5,20}$/;
-	var regExpPwLen = /^[a-zA-Z0-9]{8,20}$/;
-	var regExpName = /^[가-힣]{2,10}$/;
-	var regExpPhone = /^\d{3}-\d{3,4}-\d{4}$/;
-	var regExpEmail = /^[a-zA-Z0-9]([-_\.]?[a-zA-Z0-9])*@[a-zA-Z0-9]([-_\.]?[a-zA-Z0-9])*\.[a-zA-Z]{2,3}$/i;
-	
-	var id = form.mem_id.value;
-	var pw = form.mem_pw.value;
-	var pwChk = form.mem_pw_chk.value;
-	var name = form.mem_name.value;
-	var phone = form.mem_phone.value;
-	var email = form.mem_email.value;
-	
-	if(!regExpId.test(id)){
-		alert("아이디는 5~20자의 영문 소문자 및 숫자만 가능합니다.");
-		form.mem_id.select();
-		form.mem_id.focus();
-		return false;
-	}
-	
-	if(!regExpPwLen.test(pw)){
-		alert("비밀번호는 8~20자를 넘어야 합니다.");
-		form.mem_pw.select();
-		form.mem_pw.focus();
-		return false;
-	}
-	
-	if(pw != pwChk){
-		alert("비밀번호와 일치하지 않습니다.");
-		form.mem_pw_chk.select();
-		form.mem_pw_chk.focus();
-		return false;
-	}
-	
-	if(!regExpName.test(name)){
-		alert("이름을 입력하세요.");
-		form.mem_name.select();
-		form.mem_name.focus();
-		return false;
-	}
-
-	if(!regExpPhone.test(phone)){
-		alert("휴대전화번호를 '-'을 포함하여 입력해주세요.");
-		form.mem_phone.select();
-		form.mem_phone.focus();
-		return false;
-	}
-	
-	if(!regExpEmail.test(email)){
-		alert("이메일을 확인해주세요.");
-		form.mem_email.select();
-		form.mem_email.focus();
-		return false
-	}
-
-	form.submit();
-}
-
-</script>
-
 </head>
+<body>
 	<!-- Menu -->
 	<%@ include file="menu.jsp"%>
 	
@@ -108,7 +21,7 @@ function chkSignUp(){
 			<div class="row">
 				<div class="col-lg-12 mt-5">
 					<div class="container mt-4">
-						<h2>회원 가입</h2>
+						<h2>마이페이지</h2>
 					</div>
 				</div>
 			</div>
@@ -158,8 +71,8 @@ function chkSignUp(){
 		</div>
 	</body>
 	
+	
 	<!-- Footer -->
 	<%@ include file="footer.jsp"%>
-
 </body>
 </html>

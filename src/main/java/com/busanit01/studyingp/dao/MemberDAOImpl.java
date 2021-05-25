@@ -63,6 +63,8 @@ public class MemberDAOImpl implements MemberDAO{
 	public MemberDTO signIn(MemberDTO memberDto) throws Exception{
 		return sqlSession.selectOne("mappers.MemberMapper.signIn", memberDto);
 	}
-	
-	
+	@Override
+	public int idChk(MemberDTO memberDto) throws Exception {
+		return sqlSession.selectOne("mappers.MemberMapper.idChk", memberDto);
+	}		
 }

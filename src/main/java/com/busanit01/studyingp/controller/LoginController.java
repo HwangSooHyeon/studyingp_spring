@@ -42,6 +42,7 @@ public class LoginController {
 		
 		if(user != null && pwdEncoder.matches(password, user.getMem_pw())) {
 			currentUser.setMem_id(user.getMem_id());
+			currentUser.setMem_name(user.getMem_name());
 			currentUser.setMem_access(user.getMem_access());
 
 			session.setAttribute("currentUser", currentUser);
@@ -53,17 +54,6 @@ public class LoginController {
 			
 			return Utility.direction("login", params);
 		}		
-		/*
-		 * if(user == null) { String msg = "존재하지 않는 계정입니다."; Map<String, String> params
-		 * = new HashMap<String, String>(); params.put("msg", msg);
-		 * 
-		 * return Utility.direction("login", params); }else {
-		 * currentUser.setMem_id(user.getMem_id());
-		 * currentUser.setMem_access(user.getMem_access());
-		 * 
-		 * session.setAttribute("currentUser", currentUser); return
-		 * Utility.direction("redirect:/main", null); }
-		 */
 	}
 	
 	@RequestMapping(value = "/goSignUp", method = RequestMethod.GET)

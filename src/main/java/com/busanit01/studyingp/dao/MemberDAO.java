@@ -21,8 +21,6 @@ public interface MemberDAO {
 	// 권한검색
 	public List<MemberDTO> selectMemAccess(MemberDTO memberDto);
 	
-	// 로그인
-	public MemberDTO signIn(MemberDTO memberDto) throws Exception;	
 	//회원가입
 	public int insertMem(MemberDTO memberDto);
 	//정보수정
@@ -31,5 +29,10 @@ public interface MemberDAO {
 	public int deleteMem(MemberDTO memberDto);
 	//권한변경
 	public int updateMemAccess(MemberDTO memberDto);
+	
+	// 로그인
+	public MemberDTO signIn(MemberDTO memberDto) throws Exception;
+	// 아이디 중복 확인
+	public int idChk(MemberDTO memberDto) throws Exception;
 	
 }
