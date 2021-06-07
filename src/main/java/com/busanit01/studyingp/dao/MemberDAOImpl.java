@@ -29,19 +29,19 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 	@Override
 	public MemberDTO selectMemCode(MemberDTO memberDto) {
-		return sqlSession.selectOne("mappers.MemberMapper.selectMemCode");
+		return sqlSession.selectOne("mappers.MemberMapper.selectMemCode", memberDto);
 	}
 	@Override
 	public MemberDTO selectMemId(MemberDTO memberDto) {
-		return sqlSession.selectOne("mappers.MemberMapper.selectMemId");
+		return sqlSession.selectOne("mappers.MemberMapper.selectMemId", memberDto);
 	}
 	@Override
 	public MemberDTO selectMemName(MemberDTO memberDto) {
-		return sqlSession.selectOne("mappers.MemberMapper.selectMemName");
+		return sqlSession.selectOne("mappers.MemberMapper.selectMemName", memberDto);
 	}
 	@Override
 	public List<MemberDTO> selectMemAccess(MemberDTO memberDto) {
-		return sqlSession.selectList("mappers.MemberMapper.selectMemAccess");
+		return sqlSession.selectList("mappers.MemberMapper.selectMemAccess", memberDto);
 	}
 	@Override
 	public int insertMem(MemberDTO memberDto) {
@@ -66,5 +66,10 @@ public class MemberDAOImpl implements MemberDAO{
 	@Override
 	public int idChk(MemberDTO memberDto) throws Exception {
 		return sqlSession.selectOne("mappers.MemberMapper.idChk", memberDto);
-	}		
+	}
+	@Override
+	public int pwChk(MemberDTO memberDto) throws Exception {
+		return sqlSession.selectOne("mappers.MemberMapper.pwChk", memberDto);
+	}
+	
 }

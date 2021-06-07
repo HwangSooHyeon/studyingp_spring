@@ -46,28 +46,21 @@ public class ClassDAOImpl implements ClassDAO{
 
 	@Override
 	public int insertCls(ClassDTO classDto) {
-		int result = sqlSession.insert("mappers.ClassMapper.insertCls", classDto);
-		sqlSession.commit();
-		return result;
+		return sqlSession.insert("mappers.ClassMapper.insertCls", classDto);
 	}
 
 	@Override
 	public int updateCls(ClassDTO classDto) {
-		int result = sqlSession.update("mappers.ClassMapper.updateCls", classDto);
-		sqlSession.commit();
-		return result;
+		return sqlSession.update("mappers.ClassMapper.updateCls", classDto);
 	}
 
 	@Override
 	public int deleteCls(ClassDTO classDto) {
-		int result = sqlSession.update("mappers.ClassMapper.deleteCls", classDto);
-		sqlSession.commit();
-		return result;
+		return sqlSession.update("mappers.ClassMapper.deleteCls", classDto);
 	}
 
 	@Override
 	public ClassDTO selectClsCode(ClassDTO classDto) {
 		return sqlSession.selectOne("mappers.ClassMapper.selectClsCode", classDto);
-	}
-	
+	}	
 }

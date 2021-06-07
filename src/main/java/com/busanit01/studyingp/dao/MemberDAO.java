@@ -34,5 +34,7 @@ public interface MemberDAO {
 	public MemberDTO signIn(MemberDTO memberDto) throws Exception;
 	// 아이디 중복 확인
 	public int idChk(MemberDTO memberDto) throws Exception;
+	// 비밀번호 확인
+	public int pwChk(MemberDTO memberDto) throws Exception;
 	
 }

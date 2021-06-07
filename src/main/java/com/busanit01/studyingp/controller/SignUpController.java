@@ -46,7 +46,6 @@ public class SignUpController {
 			
 			int result = memberService.signUp(memDTO);
 			
-			
 			if(result == 1) {
 				msg = "회원가입에 성공했습니다. 로그인 가능합니다!";
 				

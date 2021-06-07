@@ -83,7 +83,7 @@
 		FROM 
 			MEMBERTBL 
 		WHERE 
-			MEM_STATUS = #{mem_status}
+			MEM_ACCESS = #{mem_access}
 	
 	</select>
 	
@@ -120,7 +120,7 @@
 			MEM_PHONE = #{mem_phone}, 
 			MEM_EMAIL = #{mem_email}
 		WHERE 
-			MEM_CODE = #{mem_code}
+			MEM_ID = #{mem_id}
 	
 	</update>
 		
@@ -151,13 +151,26 @@
 	
 	<!-- 아이디 중복 체크 -->
 	<select id="idChk" parameterType="com.busanit01.studyingp.dto.MemberDTO" resultType="int">
+	
 		SELECT 
 			COUNT(*)
 		FROM 
 			MEMBERTBL
 		WHERE
 			MEM_ID = #{mem_id}
-		
+			
 	</select>
-
-	</mapper>
+	
+	<!-- 비밀번호 확인 -->
+	<select id="pwChk" parameterType="com.busanit01.studyingp.dto.MemberDTO" resultType="int">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			MEMBERTBL
+		WHERE
+			MEM_ID = #{mem_id} AND MEM_PW = #{mem_pw}
+			
+	</select>
+		
+</mapper>

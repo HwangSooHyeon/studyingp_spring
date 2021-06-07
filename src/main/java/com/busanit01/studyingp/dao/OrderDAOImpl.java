@@ -29,15 +29,15 @@ public class OrderDAOImpl implements OrderDAO{
 	}
 	@Override
 	public OrderDTO selectOrdCode(OrderDTO orderDto){
-		return sqlSession.selectOne("mappers.OrderMapper.selectOrdCode");
+		return sqlSession.selectOne("mappers.OrderMapper.selectOrdCode", orderDto);
 	}
 	@Override
 	public List<OrderDTO> selectOrdMemCode(OrderDTO orderDto) {
-		return sqlSession.selectList("mappers.OrderMapper.selectOrdMemCode");
+		return sqlSession.selectList("mappers.OrderMapper.selectOrdMemCode", orderDto);
 	}
 	@Override
-	public List<OrderDTO> selectOrdClsCode(OrderDTO orderDto) {
-		return sqlSession.selectList("mappers.OrderMapper.selectOrdClsCode");
+	public OrderDTO selectOrdClsCode(OrderDTO orderDto) {
+		return sqlSession.selectOne("mappers.OrderMapper.selectOrdClsCode", orderDto);
 	}
 	@Override
 	public OrderDTO selectOrdCheck() {
@@ -45,22 +45,15 @@ public class OrderDAOImpl implements OrderDAO{
 	}
 	@Override
 	public int updateOrdCheck(OrderDTO orderDto) {
-		int result = sqlSession.update("mappers.OrderMapper.updateOrdCheck", orderDto);
-		sqlSession.commit();
-		return result;
-
+		return sqlSession.update("mappers.OrderMapper.updateOrdCheck", orderDto);
 	}
 	@Override
 	public int insertOrd(OrderDTO orderDto) {
-		int result = sqlSession.insert("mappers.OrderMapper.insertOrd", orderDto);
-		sqlSession.commit();
-		return result;
+		return sqlSession.insert("mappers.OrderMapper.insertOrd", orderDto);
 	}
 	@Override
 	public int deleteOrd(OrderDTO orderDto) {
-		int result = sqlSession.update("mappers.OrderMapper.deleteOrd", orderDto);
-		sqlSession.commit();
-		return result;
+		return sqlSession.update("mappers.OrderMapper.deleteOrd", orderDto);
 	}
 	
 }

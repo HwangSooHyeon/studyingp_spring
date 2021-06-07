@@ -17,7 +17,7 @@ public interface OrderDAO {
 	// 주문조회(회원번호)
 	public List<OrderDTO> selectOrdMemCode(OrderDTO orderDto);
 	// 주문조회(강의번호)
-	public List<OrderDTO> selectOrdClsCode(OrderDTO orderDto);
+	public OrderDTO selectOrdClsCode(OrderDTO orderDto);
 	// 주문조회(결제확인 체크)
 	public OrderDTO selectOrdCheck();
 	

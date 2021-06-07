@@ -3,6 +3,9 @@ package com.busanit01.studyingp.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -56,5 +59,74 @@ public class ClassService {
 	// 강의상세페이지로 넘어가는 메소드
 	public ClassDTO srchClsByCode(ClassDTO clsDTO) {
 		return clsDAO.selectClsCode(clsDTO);
+	}
+	
+	// 강의 하나만 불러오는 메소드
+	public ClassDTO getClsOne(String selClsCode) {
+		ClassDTO clsDTO = new ClassDTO();
+		clsDTO.setCls_code(Integer.valueOf(selClsCode));
+		return clsDAO.selectClsCode(clsDTO);
+	}
+	
+	// 강의 코드 쿠키를 이용해 강의를 불러오는 메소드
+	public List<ClassDTO> getClsByCookie(String[] clsCodeArr) {
+		List<ClassDTO> clsList = new ArrayList<ClassDTO>();
+		
+		for(int i = 0; i < clsCodeArr.length; i++) {
+			clsList.add(new ClassDTO());
+			clsList.get(i).setCls_code(Integer.valueOf(clsCodeArr[i]));
+			clsList.set(i, clsDAO.selectClsCode(clsList.get(i)));
+		}
+		
+		return clsList;
+	}
+	
+	// 쿼리 스트링의 강의 코드를 이용해 강의를 불러오는 메소드(단일)
+	public List<ClassDTO> getClsByQuery(String selClsCode) {
+		ClassDTO clsDTO = new ClassDTO();
+		clsDTO.setCls_code(Integer.valueOf(selClsCode));
+		clsDTO = clsDAO.selectClsCode(clsDTO);
+		
+		List<ClassDTO> orderClsList = new ArrayList<ClassDTO>(); 
+		orderClsList.add(clsDTO);
+		
+		return orderClsList;
+	}	
+	
+	// 장바구니에서 강의를 삭제하는 메소드
+	public String delClsCart(String selClsCode, String clsCode) {
+		String[] clsCodeArr = clsCode.split("_");
+		String reClsCode = "";
+		int delIndex = 0;
+		// 1. 선택한 강의 번호와 같은 번호를 쿠키에서 찾음
+		for(int i = 0; i < clsCodeArr.length; i++) {
+			if(clsCodeArr[i].equals(selClsCode)) {
+				delIndex = i;
+				break;
+			}
+		}
+		// 2. 선택한 강의 번호와 같은 번호를 제외하고 재조립
+		for(int i = 0; i < clsCodeArr.length; i++) {
+			if(clsCodeArr.length == 1 && selClsCode.equals(clsCodeArr[0])) {
+				break;
+			}
+			
+			if(i == delIndex) {
+				continue;
+			}
+			
+			if(reClsCode.equals("")) {
+				reClsCode = clsCodeArr[i];
+			}else{
+				reClsCode = reClsCode + "_" + clsCodeArr[i];
+			}
+		}
+		
+		return reClsCode;
+	}
+	
+	// 강의를 업로드하는 메소드
+	public int uploadCls(ClassDTO clsDTO) {
+		return clsDAO.insertCls(clsDTO);
 	}
 }

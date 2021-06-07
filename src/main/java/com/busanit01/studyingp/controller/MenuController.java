@@ -1,20 +1,12 @@
 package com.busanit01.studyingp.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.busanit01.studyingp.dto.ClassDTO;
-import com.busanit01.studyingp.service.ClassService;
 import com.busanit01.studyingp.util.Utility;
 
 @Controller
@@ -31,5 +23,15 @@ public class MenuController {
 		session.invalidate();
 		
 		return Utility.direction("redirect:/main", null);
+	}
+	
+	@RequestMapping(value = "/mypage", method = {RequestMethod.POST, RequestMethod.GET})
+	public ModelAndView mypage() {
+		return Utility.direction("mypage", null);
+	}
+	
+	@RequestMapping(value = "/upload", method = RequestMethod.GET)
+	public ModelAndView goUpload() {
+		return Utility.direction("upload", null);
 	}
 }

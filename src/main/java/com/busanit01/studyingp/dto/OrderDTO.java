@@ -21,7 +21,7 @@ public class OrderDTO {
 	// 회원코드
 	private int mem_code;
 	// 강의코드
-	private int cls_code;
+	private String cls_code_all;
 	// 주문날짜
 	private Date ord_date;
 	// 주문금액

@@ -10,6 +10,18 @@
 
 <%@ include file="settings/csssetting.jsp"%>
 
+<script type="text/javascript">
+
+$(document).ready(function(){
+	var responseMessage = "${params.msg}";
+	
+	if(responseMessage != ""){
+		alert(responseMessage);
+	}	
+});
+
+</script>
+
 </head>
 <body>
 	<!-- Menu -->

@@ -4,8 +4,12 @@
 <!-- 네비바 -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 	<div class="container">
-		<a class="navbar-brand" href="./main.jsp"><img width="100px"
-			src="./resources/img/mlog.png"></a>
+	
+		<c:set var="username" value="${currentUser.mem_name}"></c:set>
+		<c:set var="access" value="${currentUser.mem_access}"></c:set>
+		
+		<a class="navbar-brand" href="/main"><img width="100px"
+			src="/resources/img/mlog.png"></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarResponsive" aria-controls="navbarResponsive"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -31,11 +35,20 @@
 					class="dropdown-item" href="#">자유</a>
 			</div>
 		</li>
+		
+		<c:if test="${access == 1}">
+			<li class="nav-item navbar-dark" style="list-style: none;">
+				<a class="nav-link" href="/upload" style="color: #fff"> 강의 업로드 </a>
+			</li>
+			<li class="nav-item navbar-dark" style="list-style: none;">
+				<a class="nav-link" href="#" style="color: #fff"> 강의 수정 </a>
+			</li>
+		</c:if>
+		
+		
 		<div class="collapse navbar-collapse" id="navbarResponsive"
 			style="text: center">
-			<ul class="navbar-nav ml-auto">
-				<c:set var="username" value="${currentUser.mem_name}"></c:set>
-				<c:set var="access" value="${currentUser.mem_access}"></c:set>
+			<ul class="navbar-nav ml-auto">				
 
 				<c:choose>
 					<c:when test="${username != null}">
@@ -45,23 +58,29 @@
 						</li>
 					</c:when>
 					<c:otherwise>
+						<li class="nav-item"><a class="nav-link" href="/cart">장바구니</a>
+						</li>
 						<li class="nav-item active"><a class="nav-link" href="#">GUEST님
 						</a></li>
 						<li class="nav-item"><a class="nav-link" href="/goLogin">로그인</a>
-						</li>
+						</li>						
 					</c:otherwise>
 				</c:choose>
-
-				<li class="nav-item dropdown navbar-dark" style="list-style: none;">
-					<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"	style="color: #fff">
-						<i class="fas fa-user-circle"></i>
-					</a>
-					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#">마이페이지</a> 
-						<a class="dropdown-item" href="#">장바구니</a> 
-						<a class="dropdown-item" href="#">수강 정보</a>
-					</div>
-				</li>
+				
+				<c:if test="${access != null}">
+					<li class="nav-item dropdown navbar-dark" style="list-style: none;">
+						<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"	style="color: #fff">
+							<i class="fas fa-user-circle"></i>
+						</a>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" href="/mypage">마이페이지</a> 
+							<a class="dropdown-item" href="/cart">장바구니</a>
+							<a class="dropdown-item" href="/bill">주문조회</a> 
+							<a class="dropdown-item" href="#">수강 정보</a>
+						</div>
+					</li>
+				</c:if>				
+				
 			</ul>
 		</div>
 	</div>

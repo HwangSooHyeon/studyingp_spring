@@ -9,6 +9,41 @@
 <title>Studying P - ClassInfo</title>
 
 <%@ include file="settings/csssetting.jsp" %>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+	var responseMessage = "${params.msg}";
+	
+	if(responseMessage != ""){
+		alert(responseMessage);}
+});
+
+function addCart(){
+	
+	const URLSearch = new URLSearchParams(location.search);
+	var clsData = URLSearch.get('clsCode');
+	
+	$.ajax({
+		url : "/addCart",
+		type : "GET",
+		dataType : "text",
+		data : {clsCode : clsData},
+		success : function(data){
+			console.log(data);
+			var result = confirm(data);
+			if(result){
+				location.href = '/cart';
+			}
+		},
+		error : function(data){
+			console.log(data);
+		}
+	});
+}
+
+</script>
+
 </head>
 
 <body>
@@ -18,11 +53,10 @@
 	<div class="classInfo-head col-lg-9 col-md-6 mb-4">
 		<div class="container row">
 			<div class="col">
-				<a href="#"><img class="" src="./resources/img/${params.ClsInfo.cls_img}" alt=""
+				<a href="#"><img class="" src="/resources/img/${params.ClsInfo.cls_img}" alt=""
 					width="500vh"></a>
 			</div>
 			<div class="col">
-
 				<div id="classInfo-info">
 					<h5>
 						<a href="#">${params.ClsInfo.cls_category}</a>
@@ -33,10 +67,10 @@
 						<em>${params.ClsInfo.cls_period}
 						</em> <br> 까지 수강 가능 <br>
 					</p>
-					<button class="classInfo-btn btn btn-primary"><fmt:formatNumber value="${params.ClsInfo.cls_price}" type="number"/> 원
-					</button>
+					<button class="classInfo-btn btn btn-primary" onclick="addCart()">
+						<fmt:formatNumber value="${params.ClsInfo.cls_price}" type="number"/> 원
+					</button>				
 				</div>
-
 				<br>
 			</div>
 		</div>

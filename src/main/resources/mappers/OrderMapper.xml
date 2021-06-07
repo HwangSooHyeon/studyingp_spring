@@ -71,7 +71,7 @@
 		FROM
 			ORDERTBL
 		WHERE
-			CLS_CODE = #{cls_code} AND ORD_CANCEL = 1
+			CLS_CODE = #{cls_code_all} AND ORD_CANCEL = 1
 	
 	</select>
 	
@@ -103,9 +103,9 @@
 	<insert id="insertOrd" parameterType="com.busanit01.studyingp.dto.OrderDTO">
 	
 		INSERT INTO 
-			ORDERTBL (MEM_CODE, CLS_CODE, ORD_DATE, ORD_TOTAL, ORD_CANCEL)
+			ORDERTBL (MEM_CODE, CLS_CODE_ALL, ORD_DATE, ORD_TOTAL, ORD_CANCEL)
 		VALUES 
-			(#{mem_code}, #{cls_code}, NOW(), #{ord_total}, 1)
+			(#{mem_code}, #{cls_code_all}, NOW(), #{ord_total}, 1)
 	
 	</insert>
 		
