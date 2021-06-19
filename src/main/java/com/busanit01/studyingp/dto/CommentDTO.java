@@ -1,7 +1,5 @@
 package com.busanit01.studyingp.dto;
 
-import java.sql.*;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,7 +23,7 @@ public class CommentDTO {
     //댓글내용
     private int cmt_content = 0;
     // 댓글작성일
-    private Date cmt_date = null;
+    private String cmt_date = null;
     // 댓글삭제여부
     private int cmt_delete = 0;
     

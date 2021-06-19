@@ -30,6 +30,18 @@ public class Utility {
 		return modelView;
 	}
 	
+	public static ModelAndView direction(String url, 
+			Map<String, ?> params1, Map<String, ?> params2, Map<String, ?> params3) {
+		ModelAndView modelView = new ModelAndView();
+		
+		modelView.setViewName(url);
+		modelView.addObject("params1", params1);
+		modelView.addObject("params2", params2);
+		modelView.addObject("params3", params3);
+		
+		return modelView;
+	}
+	
 	public static int addClsCookie(String clsCode, HttpServletRequest request, HttpServletResponse response) {
 		Cookie[] cookies = request.getCookies();
 		String clsCodeCookie = "";

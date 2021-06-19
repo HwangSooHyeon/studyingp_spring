@@ -31,7 +31,7 @@ public class MemberDTO {
     // 권한
     private int mem_access = 0;
     // 가입일
-    private Date mem_date = null;
+    private String mem_date = null;
     // 탈퇴여부
     private int mem_status = 0;    
 }

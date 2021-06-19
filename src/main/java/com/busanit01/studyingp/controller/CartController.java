@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -56,7 +57,7 @@ public class CartController {
 	}
 		
 	@RequestMapping(value = "/cart", method = RequestMethod.GET)
-	public ModelAndView goCart(@CookieValue(value = "clsCode", required = false) String clsCode ) {
+	public ModelAndView goCart(@CookieValue(value = "clsCode", required = true, defaultValue = "") String clsCode ) {
 		if(clsCode.equals("")) {
 			String msg = "장바구니에 상품이 없습니다.";
 			Map<String, String> params = new HashMap<String, String>();
@@ -188,5 +189,25 @@ public class CartController {
 		params2.put("fClsList", fClsList);
 		
 		return Utility.direction("bill", params1, params2);
+	}
+	
+	@RequestMapping(value = "/ordCancel", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView ordCancel(@RequestParam("ordCode") String ordCode) {
+		OrderDTO ordDTO = new OrderDTO();
+		ordDTO.setOrd_code(Integer.valueOf(ordCode));
+		
+		int result = orderService.cancelOrd(ordDTO);
+		
+		if(result == 1) {
+			String msg = "주문을 취소하였습니다. 확인을 누르면 주문조회 페이지로 돌아갑니다.";
+			Map<String, String> params = new HashMap<String, String>();
+			params.put("msg", msg);
+			return Utility.direction("cancelord", params);
+		}else {
+			String msg = "주문 취소에 실패했습니다. 확인을 누르면 주문조회 페이지로 돌아갑니다.";
+			Map<String, String> params = new HashMap<String, String>();
+			params.put("msg", msg);
+			return Utility.direction("cancelord", params);
+		}
 	}
 }

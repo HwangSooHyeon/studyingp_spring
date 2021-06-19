@@ -12,12 +12,14 @@ public interface MemberDAO {
 	public List<MemberDTO> selectMemAll();
 	// 탈퇴회원검색
 	public List<MemberDTO> selectMemDel();
-	// 코드검색
+	// 코드검색(미탈퇴)
 	public MemberDTO selectMemCode(MemberDTO memberDto);
+	// 코드검색(탈퇴포함)
+	public MemberDTO selectMemCodeAll(MemberDTO memberDto);
 	// 아이디검색
 	public MemberDTO selectMemId(MemberDTO memberDto);
 	// 이름검색
-	public MemberDTO selectMemName(MemberDTO memberDto);
+	public List<MemberDTO> selectMemName(MemberDTO memberDto);
 	// 권한검색
 	public List<MemberDTO> selectMemAccess(MemberDTO memberDto);
 	

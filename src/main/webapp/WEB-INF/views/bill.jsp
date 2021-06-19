@@ -20,6 +20,15 @@ $(document).ready(function(){
 		alert(responseMessage);}
 });
 
+function delOrdChk(selOrd){
+	var result = confirm("주문을 취소하시겠습니까? 확인을 누르면 계속 진행합니다.");
+	
+	 if(result){
+		 location.href = 'ordCancel?ordCode=' + selOrd;
+	 }else{
+		 
+	 }
+}
 </script>
 <body>
 	<!-- Menu -->
@@ -54,10 +63,10 @@ $(document).ready(function(){
 							<th class="align-middle text-center"><fmt:formatNumber value="${item.ord_total}" type="number"/>원</th>
 							<th>
 								<div class="d-flex flex-column">
-									<div class="py-2 px-3 my-1 text-white btn btn-secondary" 
-									align="center" style="border-radius: 10px;">주문상세보기</div>
-									<div class="py-2 px-3 my-1 text-black btn btn-light" 
-									align="center" style="border-radius: 10px;">주문취소</div>
+									<a class="py-2 px-3 my-1 text-white btn btn-secondary" 
+									style="border-radius: 10px;" href="/editOrdOne?ordCode=${item.ord_code}">주문상세보기</a>
+									<a class="py-2 px-3 my-1 text-black btn btn-light"
+									style="border-radius: 10px;" onclick="delOrdChk(${item.ord_code})">주문취소</a>
 								</div>
 							</th>													
 						</tr>

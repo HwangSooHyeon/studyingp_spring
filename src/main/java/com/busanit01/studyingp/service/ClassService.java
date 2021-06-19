@@ -3,14 +3,13 @@ package com.busanit01.studyingp.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.busanit01.studyingp.dao.ClassDAO;
+import com.busanit01.studyingp.dao.MemberDAO;
 import com.busanit01.studyingp.dto.ClassDTO;
+import com.busanit01.studyingp.dto.MemberDTO;
 
 @Service
 public class ClassService {
@@ -24,6 +23,12 @@ public class ClassService {
 	
 	@Autowired
 	private ClassDAO clsDAO;
+	
+	@Autowired
+	private MemberDAO memDAO;
+	
+	@Autowired
+	private MemberService memberService;
 	
 	// 테스트 메소드
 	public ClassDTO test() {
@@ -128,5 +133,43 @@ public class ClassService {
 	// 강의를 업로드하는 메소드
 	public int uploadCls(ClassDTO clsDTO) {
 		return clsDAO.insertCls(clsDTO);
+	}
+	
+	// 강의 검색 메소드
+	public List<ClassDTO> searchCls(String searchCon, String searchWord){
+		List<ClassDTO> clsList = new ArrayList<ClassDTO>();
+		ClassDTO clsDTO = new ClassDTO();
+		
+		if(searchCon.equals("searchCls")) {
+			return clsDAO.selectCls();			
+		}else if(searchCon.equals("searchClsAll")){
+			return clsDAO.selectClsAll();
+		}else if(searchCon.equals("searchClsDel")){
+			return clsDAO.selectClsDel();
+		}else if(searchCon.equals("cls_code")){
+			clsDTO.setCls_code(Integer.valueOf(searchWord));
+			clsList.add(clsDAO.selectClsCode(clsDTO));
+			return clsList;
+		}else if(searchCon.equals("cls_category")) {
+			clsDTO.setCls_category(searchWord);
+			return clsDAO.selectClsCategory(clsDTO);
+		}else if(searchCon.equals("cls_name")) {
+			clsDTO.setCls_name(searchWord);
+			return clsDAO.selectClsName(clsDTO);
+		}else if(searchCon.equals("mem_code")){
+			clsDTO.setMem_code(Integer.valueOf(searchWord));
+			return clsDAO.selectClsInstCode(clsDTO);
+		}else if(searchCon.equals("mem_name")) {
+			MemberDTO memDTO = new MemberDTO();
+			memDTO.setMem_name(searchWord);			
+			return clsDAO.selectClsInst(memDTO);
+		}else {
+			return null;
+		}
+	}
+	
+	// 강의 수정 메소드
+	public int updateCls(ClassDTO clsDTO) {
+		return clsDAO.updateCls(clsDTO);
 	}
 }

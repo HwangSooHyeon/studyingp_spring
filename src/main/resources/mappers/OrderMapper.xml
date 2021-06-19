@@ -47,7 +47,19 @@
 		FROM
 			ORDERTBL
 		WHERE
-			ORD_CODE = #{ord_code}  AND ORD_CANCEL = 1
+			ORD_CODE = #{ord_code} AND ORD_CANCEL = 1
+	
+	</select>
+	
+	<!-- 관리자 주문 조회 (주문번호) -->
+	<select id="selectOrdCodeAdm" parameterType="com.busanit01.studyingp.dto.OrderDTO" resultType="com.busanit01.studyingp.dto.OrderDTO">
+	
+		SELECT
+			*
+		FROM
+			ORDERTBL
+		WHERE
+			ORD_CODE = #{ord_code}
 	
 	</select>
 	
@@ -63,6 +75,50 @@
 	
 	</select>
 	
+	<!-- 관리자 주문 조회(회원 번호) -->
+	<select id="selectOrdMemCodeAdm" parameterType="com.busanit01.studyingp.dto.OrderDTO" resultType="com.busanit01.studyingp.dto.OrderDTO">
+	
+		SELECT
+			*
+		FROM
+			ORDERTBL
+		WHERE
+			MEM_CODE = #{mem_code}
+	
+	</select>
+	
+	<!-- 주문 조회(회원명) -->
+	<select id="selectOrdMemName" parameterType="com.busanit01.studyingp.dto.MemberDTO" resultType="com.busanit01.studyingp.dto.OrderDTO">
+	
+		SELECT
+			ORD_CODE, ORDERTBL.MEM_CODE, CLS_CODE_ALL, ORD_DATE, ORD_TOTAL, ORD_CANCEL, ORD_CHECK, ORD_CHKDATE
+		FROM 
+			ORDERTBL
+		INNER JOIN
+			MEMBERTBL
+		ON
+			ORDERTBL.MEM_CODE = MEMBERTBL.MEM_CODE
+		WHERE
+			MEMBERTBL.MEM_NAME LIKE CONCAT('%', #{mem_name}, '%')	
+		
+	</select>
+	
+	<!-- 주문 조회(회원아이디) -->
+	<select id="selectOrdMemId" parameterType="com.busanit01.studyingp.dto.MemberDTO" resultType="com.busanit01.studyingp.dto.OrderDTO">
+	
+		SELECT
+			ORD_CODE, ORDERTBL.MEM_CODE, CLS_CODE_ALL, ORD_DATE, ORD_TOTAL, ORD_CANCEL, ORD_CHECK, ORD_CHKDATE
+		FROM 
+			ORDERTBL
+		INNER JOIN
+			MEMBERTBL
+		ON
+			ORDERTBL.MEM_CODE = MEMBERTBL.MEM_CODE
+		WHERE
+			MEMBERTBL.MEM_ID LIKE CONCAT('%', #{mem_id}, '%')
+	
+	</select>
+	
 	<!-- 주문 조회(강의 번호) -->
 	<select id="selectOrdClsCode" parameterType="com.busanit01.studyingp.dto.OrderDTO" resultType="com.busanit01.studyingp.dto.OrderDTO">
 	
@@ -71,20 +127,44 @@
 		FROM
 			ORDERTBL
 		WHERE
-			CLS_CODE = #{cls_code_all} AND ORD_CANCEL = 1
+			CLS_CODE = #{cls_code_all}
 	
 	</select>
 	
-	<!-- 주문 조회(결제 확인 체크) -->
-	<select id="selectOrdCheck" parameterType="com.busanit01.studyingp.dto.OrderDTO" resultType="com.busanit01.studyingp.dto.OrderDTO">
+	<!-- 주문 조회(결제된 주문 체크) -->
+	<select id="selectOrdCheck" resultType="com.busanit01.studyingp.dto.OrderDTO">
 	
 		SELECT
 			*
 		FROM
 			ORDERTBL
 		WHERE
-			ORD_CHECK = 1 AND ORD_CANCEL = 1
+			ORD_CHECK = 1
 	
+	</select>
+	
+	<!-- 주문 조회(미결제) -->
+	<select id="selectOrdUnchk" resultType="com.busanit01.studyingp.dto.OrderDTO">
+	
+		SELECT
+			*
+		FROM
+			ORDERTBL
+		WHERE
+			ORD_CHECK is NULL
+	
+	</select>
+	
+	<!-- 주문 조회(기간) -->
+	<select id="selectOrdDate" parameterType="com.busanit01.studyingp.dto.OrderDTO" resultType="com.busanit01.studyingp.dto.OrderDTO">
+		
+		SELECT
+			*
+		FROM
+			ORDERTBL
+		WHERE
+			ORD_DATE BETWEEN #{ord_date} AND NOW();
+		
 	</select>
 	
 	<!-- 결제 완료 -->
@@ -93,7 +173,21 @@
 		UPDATE
 			ORDERTBL
 		SET
-			ORD_CHECK = 1
+			ORD_CHECK = 1,
+			ORD_CHKDATE = NOW()
+		WHERE
+			ORD_CODE = #{ord_code}
+	
+	</update>
+	
+	<!-- 결제 취소 -->
+	<update id="cancelOrdCheck" parameterType="com.busanit01.studyingp.dto.OrderDTO">
+	
+		UPDATE
+			ORDERTBL
+		SET
+			ORD_CHECK = 0,
+			ORD_CHKDATE = '0001-01-01'
 		WHERE
 			ORD_CODE = #{ord_code}
 	
@@ -103,9 +197,9 @@
 	<insert id="insertOrd" parameterType="com.busanit01.studyingp.dto.OrderDTO">
 	
 		INSERT INTO 
-			ORDERTBL (MEM_CODE, CLS_CODE_ALL, ORD_DATE, ORD_TOTAL, ORD_CANCEL)
+			ORDERTBL (MEM_CODE, CLS_CODE_ALL, ORD_DATE, ORD_TOTAL, ORD_CANCEL, ORD_CHECK, ORD_CHKDATE)
 		VALUES 
-			(#{mem_code}, #{cls_code_all}, NOW(), #{ord_total}, 1)
+			(#{mem_code}, #{cls_code_all}, NOW(), #{ord_total}, 1, 0, '0001-01-01')
 	
 	</insert>
 		
@@ -121,4 +215,24 @@
 	
 	</update>
 	
+	<!-- 입금 확인 및 주문 취소, 복구 -->
+	<update id="updateOrd" parameterType="com.busanit01.studyingp.dto.OrderDTO">
+	
+		UPDATE
+			ORDERTBL
+		SET
+			ORD_CANCEL = #{ord_cancel},
+			ORD_CHECK = #{ord_check}
+	<choose>
+		<when test='ord_check == 0'>
+			, ORD_CHKDATE = '0001-01-01'
+		</when>
+		<when test='ord_check == 1 and "0001-01-01".equals(ord_chkdate)'>
+			, ORD_CHKDATE = NOW()
+		</when>
+	</choose>
+		WHERE			
+			ORD_CODE = #{ord_code}
+			
+	</update>
 </mapper>

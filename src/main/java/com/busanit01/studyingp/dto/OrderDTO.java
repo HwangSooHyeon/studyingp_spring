@@ -23,7 +23,7 @@ public class OrderDTO {
 	// 강의코드
 	private String cls_code_all;
 	// 주문날짜
-	private Date ord_date;
+	private String ord_date;
 	// 주문금액
 	private int ord_total;
 	// 주문취소 여부
@@ -31,6 +31,6 @@ public class OrderDTO {
 	// 결제확인
 	private int ord_check;
 	// 결제확인 날짜
-	private int ord_chkdate;
+	private String ord_chkdate;
     
 }

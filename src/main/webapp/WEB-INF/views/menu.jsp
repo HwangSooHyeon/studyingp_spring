@@ -41,10 +41,21 @@
 				<a class="nav-link" href="/upload" style="color: #fff"> 강의 업로드 </a>
 			</li>
 			<li class="nav-item navbar-dark" style="list-style: none;">
-				<a class="nav-link" href="#" style="color: #fff"> 강의 수정 </a>
+				<a class="nav-link" href="/editClsInst" style="color: #fff"> 강의 수정(강사) </a>
 			</li>
 		</c:if>
 		
+		<c:if test="${access == 0}">
+			<li class="nav-item navbar-dark" style="list-style: none;">
+				<a class="nav-link" href="/editClsAdm" style="color: #fff"> 강의 수정(관리자) </a>
+			</li>
+			<li class="nav-item navbar-dark" style="list-style: none;">
+				<a class="nav-link" href="/editMem" style="color: #fff"> 회원 조회 및 수정 </a>
+			</li>
+			<li class="nav-item navbar-dark" style="list-style: none;">
+				<a class="nav-link" href="/editOrd" style="color: #fff"> 주문 조회 및 수정 </a>
+			</li>
+		</c:if>
 		
 		<div class="collapse navbar-collapse" id="navbarResponsive"
 			style="text: center">

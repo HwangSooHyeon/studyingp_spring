@@ -1,7 +1,5 @@
 package com.busanit01.studyingp.dto;
 
-import java.sql.*;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,7 +21,7 @@ public class BoardDTO {
 	// 조회수
 	private int brd_hit;
 	// 작성일
-	private Date brd_date;
+	private String brd_date;
 	// 글내용
 	private String brd_content;
 	// 회원번호

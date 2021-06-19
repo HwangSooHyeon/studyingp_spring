@@ -73,14 +73,25 @@
 		WHERE 
 			CLS_NAME LIKE CONCAT('%', #{cls_name}, '%') AND CLS_DELETE = 1
 			
+	</select>
 	
+	<!-- 강의 조회 (강사번호) -->
+	<select id="selectClsInstCode" parameterType="com.busanit01.studyingp.dto.ClassDTO" resultType="com.busanit01.studyingp.dto.ClassDTO">
+		
+		SELECT
+			*
+		FROM
+			CLASSTBL
+		WHERE
+			MEM_CODE = #{mem_code}
+		
 	</select>
 	
 	<!-- 강의 조회 (강사명) -->
-	<select id="selectClsInst" parameterType="com.busanit01.studyingp.dto.ClassDTO" resultType="com.busanit01.studyingp.dto.ClassDTO">
+	<select id="selectClsInst" parameterType="com.busanit01.studyingp.dto.MemberDTO" resultType="com.busanit01.studyingp.dto.ClassDTO">
 	
 		SELECT 
-			* 
+			CLS_CODE, CLS_CATEGORY, CLS_NAME, CLASSTBL.MEM_CODE, CLS_PRICE, CLS_TIME, CLS_DELETE, CLS_PERIOD, CLS_CONTENT, CLS_IMG, CLS_URL
 		FROM 
 			CLASSTBL 
 		INNER JOIN 

@@ -1,5 +1,6 @@
 package com.busanit01.studyingp.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -77,4 +78,58 @@ public class OrderService {
 		return ordDAO.selectOrdMemCode(ordDTO);		
 	}
 	
+	// 주문 검색 메소드
+	public List<OrderDTO> searchOrdAdm(String searchCon, String searchWord){
+		List<OrderDTO> ordList = new ArrayList<OrderDTO>();
+		MemberDTO memDTO = new MemberDTO();
+		OrderDTO ordDTO = new OrderDTO();
+		
+		if(searchCon.equals("searchOrd")) {
+			return ordDAO.selectOrd();
+		}else if(searchCon.equals("searchOrdAll")) {
+			return ordDAO.selectOrdAll();
+		}else if(searchCon.equals("searchOrdDel")) {
+			return ordDAO.selectOrdDel();
+		}else if(searchCon.equals("mem_code")) {
+			ordDTO.setMem_code(Integer.valueOf(searchWord));
+			return ordDAO.selectOrdMemCodeAdm(ordDTO);
+		}else if(searchCon.equals("mem_id")) {
+			memDTO.setMem_id(searchWord);
+			return ordDAO.selectOrdMemId(memDTO);
+		}else if(searchCon.equals("mem_name")) {
+			memDTO.setMem_name(searchWord);
+			return ordDAO.selectOrdMemName(memDTO);
+		}else if(searchCon.equals("ord_date")) {
+			ordDTO.setOrd_date(searchWord);
+			return ordDAO.selectOrdDate(ordDTO);
+		}else if(searchCon.equals("ord_code")) {
+			ordDTO.setOrd_code(Integer.valueOf(searchWord));
+			ordList.add(ordDAO.selectOrdCode(ordDTO));
+			return ordList;
+		}else if(searchCon.equals("unchkOrd")) {
+			return ordDAO.selectOrdUnchk();
+		}else {
+			return null;
+		}
+	}
+	
+	// 주문번호로 주문 받아오기(삭제미포함)
+	public OrderDTO getOrdByCode(OrderDTO ordDTO) {
+		return ordDAO.selectOrdCode(ordDTO);
+	}
+	
+	// 주문번호로 주문 받아오기(삭제포함, 관리자전용)
+	public OrderDTO getOrdByCodeAdm(OrderDTO ordDTO) {
+		return ordDAO.selectOrdCodeAdm(ordDTO);
+	}
+	
+	// 주문확인 및 주문취소, 복구 메소드
+	public int updateOrd(OrderDTO ordDTO) {
+		return ordDAO.updateOrd(ordDTO);
+	}
+	
+	// 주문 취소
+	public int cancelOrd(OrderDTO ordDTO) {
+		return ordDAO.deleteOrd(ordDTO);
+	}
 }

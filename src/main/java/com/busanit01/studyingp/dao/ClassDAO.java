@@ -3,6 +3,7 @@ package com.busanit01.studyingp.dao;
 import java.util.List;
 
 import com.busanit01.studyingp.dto.ClassDTO;
+import com.busanit01.studyingp.dto.MemberDTO;
 
 public interface ClassDAO {
 
@@ -11,7 +12,8 @@ public interface ClassDAO {
 	public List<ClassDTO> selectClsDel();
 	public List<ClassDTO> selectClsCategory(ClassDTO classDto);
 	public List<ClassDTO> selectClsName(ClassDTO classDto);
-	public List<ClassDTO> selectClsInst(ClassDTO classDto);
+	public List<ClassDTO> selectClsInst(MemberDTO memberDto);
+	public List<ClassDTO> selectClsInstCode(ClassDTO classDto);
 	
 	public ClassDTO selectClsCode(ClassDTO classDto);
 	
