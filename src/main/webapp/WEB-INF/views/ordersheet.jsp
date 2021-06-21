@@ -36,7 +36,7 @@ $(document).ready(function(){
 			</div>
 		</div>
 	
-		<!-- 02 주문서작성 바 -->
+		<!-- 주문서작성 바 -->
 		<div class="py-5">
 			<div class="container">
 				<div class="d-flex justify-content-center">

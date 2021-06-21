@@ -172,4 +172,31 @@ public class ClassService {
 	public int updateCls(ClassDTO clsDTO) {
 		return clsDAO.updateCls(clsDTO);
 	}
+	
+	// 카테고리로 강의 검색
+	public List<ClassDTO> searchClsCategory(String clsCategory){
+		ClassDTO clsDTO = new ClassDTO();
+		clsDTO.setCls_category(clsCategory);
+		return clsDAO.selectClsCategory(clsDTO);
+	}
+	
+	// 정해진 카테고리 내에서 강의 검색 메소드
+	public List<ClassDTO> searchClsWithCategory(
+			String searchCon, String searchWord, String clsCategory){
+		ClassDTO clsDTO = new ClassDTO();
+		
+		if(searchCon.equals("cls_name")) {
+			clsDTO.setCls_name(searchWord);
+			clsDTO.setCls_category(clsCategory);
+			return clsDAO.selectClsNameWithCat(clsDTO);
+		}else if(searchCon.equals("mem_name")) {
+			MemberDTO memDTO = new MemberDTO();
+			memDTO.setMem_name(searchWord);
+			clsDTO.setCls_category(clsCategory);
+			return clsDAO.selectClsInstWithCat(clsDTO, memDTO);
+		}else {
+			return null;
+		}
+	}
+	
 }

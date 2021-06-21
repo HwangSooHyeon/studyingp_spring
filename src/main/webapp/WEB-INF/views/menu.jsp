@@ -21,18 +21,20 @@
 			<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
 			style="color: #fff"> 강의 </a>
 			<div class="dropdown-menu">
-				<a class="dropdown-item" href="#">음악</a> <a class="dropdown-item"
-					href="#">미술</a> <a class="dropdown-item" href="#">요리</a> <a
-					class="dropdown-item" href="#">IT</a>
+				<a class="dropdown-item" href="/searchClsUser?clsCategory=MUSIC">음악</a> 
+				<a class="dropdown-item" href="/searchClsUser?clsCategory=ART">미술</a> 
+				<a class="dropdown-item" href="/searchClsUser?clsCategory=COOK">요리</a> 
+				<a class="dropdown-item" href="/searchClsUser?clsCategory=IT">IT</a>
 			</div>
 		</li>
 		<li class="nav-item dropdown navbar-dark" style="list-style: none;">
 			<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
 			style="color: #fff"> 게시판 </a>
 			<div class="dropdown-menu">
-				<a class="dropdown-item" href="#">공지</a> <a class="dropdown-item"
-					href="#">리뷰</a> <a class="dropdown-item" href="#">QnA</a> <a
-					class="dropdown-item" href="#">자유</a>
+				<a class="dropdown-item" href="#">공지</a> 
+				<a class="dropdown-item" href="#">리뷰</a> 
+				<a class="dropdown-item" href="#">QnA</a> 
+				<a class="dropdown-item" href="#">자유</a>
 			</div>
 		</li>
 		

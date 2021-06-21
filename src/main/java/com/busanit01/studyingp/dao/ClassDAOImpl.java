@@ -1,6 +1,8 @@
 package com.busanit01.studyingp.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -68,6 +70,20 @@ public class ClassDAOImpl implements ClassDAO{
 	@Override
 	public List<ClassDTO> selectClsInstCode(ClassDTO classDto) {
 		return sqlSession.selectList("mappers.ClassMapper.selectClsInstCode", classDto);
-	}	
+	}
+
+	@Override
+	public List<ClassDTO> selectClsNameWithCat(ClassDTO classDto) {
+		return sqlSession.selectList("mappers.ClassMapper.selectClsNameWithCat", classDto);
+	}
+
+	@Override
+	public List<ClassDTO> selectClsInstWithCat(ClassDTO classDto, MemberDTO memberDto) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("mem_name", memberDto.getMem_name());
+		params.put("cls_category", classDto.getCls_category());
+		
+		return sqlSession.selectList("mappers.ClassMapper.selectClsInstWithCat", params);
+	}		
 	
 }

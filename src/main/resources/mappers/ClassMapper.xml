@@ -103,6 +103,35 @@
 	
 	</select>
 	
+	<!-- 강의 조회 (강사명, 카테고리) -->
+	<select id="selectClsInstWithCat" parameterType="Map" resultType="com.busanit01.studyingp.dto.ClassDTO">
+	
+		SELECT 
+			CLS_CODE, CLS_CATEGORY, CLS_NAME, CLASSTBL.MEM_CODE, CLS_PRICE, CLS_TIME, CLS_DELETE, CLS_PERIOD, CLS_CONTENT, CLS_IMG, CLS_URL
+		FROM 
+			CLASSTBL 
+		INNER JOIN 
+			MEMBERTBL 
+		ON 
+			CLASSTBL.MEM_CODE = MEMBERTBL.MEM_CODE 
+		WHERE 
+			MEMBERTBL.MEM_NAME LIKE CONCAT('%', #{mem_name}, '%') AND CLASSTBL.CLS_DELETE = 1 AND CLASSTBL.CLS_CATEGORY = #{cls_category}
+	
+	</select>
+	
+	<!-- 강의 조회 (강의명, 카테고리) -->
+	<select id="selectClsNameWithCat" parameterType="com.busanit01.studyingp.dto.ClassDTO" resultType="com.busanit01.studyingp.dto.ClassDTO">
+	
+		SELECT
+			*
+		FROM
+			CLASSTBL
+		WHERE
+			CLS_NAME LIKE CONCAT('%', #{cls_name}, '%') AND CLS_CATEGORY = #{cls_category} AND CLS_DELETE = 1
+	
+	</select>
+	
+	
 	<!-- 강의 개설 -->
 	<insert id="insertCls" parameterType="com.busanit01.studyingp.dto.ClassDTO">
 	
