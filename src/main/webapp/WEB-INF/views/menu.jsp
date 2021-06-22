@@ -89,7 +89,7 @@
 							<a class="dropdown-item" href="/mypage">마이페이지</a> 
 							<a class="dropdown-item" href="/cart">장바구니</a>
 							<a class="dropdown-item" href="/bill">주문조회</a> 
-							<a class="dropdown-item" href="#">수강 정보</a>
+							<a class="dropdown-item" href="/courseInfo">수강 정보</a>
 						</div>
 					</li>
 				</c:if>				
