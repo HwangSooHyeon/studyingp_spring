@@ -16,6 +16,7 @@ public interface ClassDAO {
 	public List<ClassDTO> selectClsInstCode(ClassDTO classDto);
 	public List<ClassDTO> selectClsNameWithCat(ClassDTO classDto);
 	public List<ClassDTO> selectClsInstWithCat(ClassDTO classDto, MemberDTO memberDto);
+	public ClassDTO selectClsAfterUpload(ClassDTO classDto);
 	
 	public ClassDTO selectClsCode(ClassDTO classDto);
 	

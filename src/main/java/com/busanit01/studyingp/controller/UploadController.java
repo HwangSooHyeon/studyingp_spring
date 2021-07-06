@@ -24,7 +24,7 @@ import com.busanit01.studyingp.util.Utility;
 
 @Controller
 public class UploadController {
-	private static final String FILE_PATH = "C:\\Users\\mikae\\Desktop\\studyingp_spring\\studyingp_spring\\src\\main\\webapp\\resources\\img";
+	//private static final String FILE_PATH = "C:\\Users\\mikae\\Desktop\\studyingp_spring\\studyingp_spring\\src\\main\\webapp\\resources\\img";
 	
 	@Autowired
 	private MemberService memberService;
@@ -38,20 +38,23 @@ public class UploadController {
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String fileName = file.getOriginalFilename();
 		
+		// 파일 경로
+		String file_path = request.getSession().getServletContext().getRealPath("/resources/img/");
+
+		// cls_img 이름
 		clsDTO.setCls_img(fileName);
 		
+		// clsDTO에 mem_code 할당
 		HttpSession session = request.getSession();
-		
 		MemberDTO memDTO = (MemberDTO) session.getAttribute("currentUser");
-		
 		memDTO = memberService.getMemById(memDTO);
 		
-		clsDTO.setMem_code(memDTO.getMem_code());
+		clsDTO.setMem_code(memDTO.getMem_code());		
 		
-		int result = classService.uploadCls(clsDTO);
+		int result = classService.uploadCls(clsDTO, memDTO);
 		
 		if(!file.getOriginalFilename().isEmpty() && result == 1) {
-			file.transferTo(new File(FILE_PATH, fileName));
+			file.transferTo(new File(file_path, fileName));
 			String msg = "업로드에 성공했습니다. 확인 버튼을 누르면 메인화면으로 갑니다.";
 			Map<String, String> params = new HashMap<String, String>();
 			params.put("msg", msg);

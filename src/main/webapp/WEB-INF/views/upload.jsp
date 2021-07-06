@@ -74,7 +74,11 @@
 						<div class="form-group">
 							<label for="cls_url">강의 URL</label>
 							<textarea class="form-control" rows="3" cols="" name="cls_url" id="cls_url" placeholder="Youtube 공유의 퍼가기 내용을 복사 후 붙여넣어 주세요." required></textarea>
-						</div>				
+						</div>	
+						<div class="form-group">
+							<label for="cls_totlect">총 강의 차수</label>							
+							<input type="text" class="form-control" name="cls_totlect" id="cls_totlect" placeholder="총 강의 차수를 입력하세요." required/>
+						</div>			
 						<input type="submit" class="btn btn-lg btn-primary btn-block" style="border: 2px solid; padding: 14px 5px" value="업로드하기">
 					</form>
 				</div>

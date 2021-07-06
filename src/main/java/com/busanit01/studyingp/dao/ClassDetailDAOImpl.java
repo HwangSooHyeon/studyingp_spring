@@ -5,9 +5,11 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Repository;
 
 import com.busanit01.studyingp.dto.ClassDetailDTO;
 
+@Repository
 public class ClassDetailDAOImpl implements ClassDetailDAO{
 	@Inject
 	private SqlSession sqlSession;
@@ -45,6 +47,26 @@ public class ClassDetailDAOImpl implements ClassDetailDAO{
 	@Override
 	public List<ClassDetailDTO> selectClsDetailMemCode(ClassDetailDTO clsDetailDTO) {
 		return sqlSession.selectList("mappers.ClassDetailMapper.selectClsDetailMemCode", clsDetailDTO);
+	}
+
+	@Override
+	public int insertClsDetail(ClassDetailDTO clsDetailDTO) {
+		return sqlSession.insert("mappers.ClassDetailMapper.insertClsDetail", clsDetailDTO);
+	}
+
+	@Override
+	public int updateClsDetail(ClassDetailDTO clsDetailDTO) {
+		return sqlSession.update("mappers.ClassDetailMapper.updateClsDetail", clsDetailDTO);
+	}
+
+	@Override
+	public int deleteClsDetail(ClassDetailDTO clsDetailDTO) {
+		return sqlSession.update("mappers.ClassDetailMapper.deleteClsDetail", clsDetailDTO);
+	}
+
+	@Override
+	public int initDelClsDetail(ClassDetailDTO clsDetailDTO) {
+		return sqlSession.delete("mappers.ClassDetailMapper.initDelClsDetail", clsDetailDTO);
 	}
 	
 }

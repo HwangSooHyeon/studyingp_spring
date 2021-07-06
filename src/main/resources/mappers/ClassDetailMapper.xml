@@ -58,7 +58,7 @@
 		FROM
 			CLASSDETAIL
 		WHERE
-			CLS_CODE = #{cls_code}
+			CLS_CODE = #{cls_code} AND CLSD_DELETE = 1
 	
 	</select>
 	
@@ -85,4 +85,54 @@
 			MEM_CODE = #{mem_code}
 	
 	</select>
+	
+	<!-- 강의 하나 업로드 -->
+	<insert id="insertClsDetail" parameterType="com.busanit01.studyingp.dto.ClassDetailDTO">
+	
+		INSERT INTO
+			CLASSDETAIL (CLSD_URL, MEM_CODE, CLS_CODE, CLSD_LECT, CLSD_CONTENT, CLSD_DELETE, CLS_TOTLECT)
+		VALUES
+			(#{clsd_url}, #{mem_code}, #{cls_code}, #{clsd_lect}, #{clsd_content}, 1, #{cls_totlect})
+	
+	</insert>
+	
+	<!-- 강의 하나 수정 -->
+	<update id="updateClsDetail" parameterType="com.busanit01.studyingp.dto.ClassDetailDTO">
+		
+		UPDATE
+			CLASSDETAIL
+		SET
+			CLSD_URL = #{clsd_url},
+			MEM_CODE = #{mem_code},
+			CLS_CODE = #{cls_code},
+			CLSD_LECT = #{clsd_lect},
+			CLSD_CONTENT = #{clsd_content},
+			CLS_TOTLECT = #{cls_totlect}
+		WHERE
+			CLSD_CODE = #{clsd_code}
+			
+	</update>
+	
+	<!-- 강의 하나 삭제(감춤) -->
+	<update id="deleteClsDetail" parameterType="com.busanit01.studyingp.dto.ClassDetailDTO">
+	
+		UPDATE
+			CLASSDETAIL
+		SET
+			CLSD_DELETE = 0
+		WHERE
+			CLSD_CODE = #{clsd_code}
+	
+	</update>
+	
+	<!-- 강의 하나 초기 생성 중 에러 발생시 완전 삭제 쿼리 -->
+	<delete id="initDelClsDetail" parameterType="com.busanit01.studyingp.dto.ClassDetailDTO">
+	
+		DELETE FROM
+			CLASSDETAIL
+		WHERE
+			CLS_CODE = #{cls_code}
+		
+	</delete>
+	
 </mapper>

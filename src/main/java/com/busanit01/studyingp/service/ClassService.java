@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.busanit01.studyingp.dao.ClassDAO;
+import com.busanit01.studyingp.dao.ClassDetailDAO;
 import com.busanit01.studyingp.dao.MemberDAO;
 import com.busanit01.studyingp.dto.ClassDTO;
+import com.busanit01.studyingp.dto.ClassDetailDTO;
 import com.busanit01.studyingp.dto.MemberDTO;
 
 @Service
@@ -23,6 +25,9 @@ public class ClassService {
 	
 	@Autowired
 	private ClassDAO clsDAO;
+	
+	@Autowired
+	private ClassDetailDAO clsDetailDAO;
 	
 	@Autowired
 	private MemberDAO memDAO;
@@ -131,8 +136,45 @@ public class ClassService {
 	}
 	
 	// 강의를 업로드하는 메소드
-	public int uploadCls(ClassDTO clsDTO) {
-		return clsDAO.insertCls(clsDTO);
+	public int uploadCls(ClassDTO clsDTO, MemberDTO memDTO) {
+		ClassDetailDTO clsDetailDTO = new ClassDetailDTO();
+		
+		// 강의 업로드
+		int result = clsDAO.insertCls(clsDTO);
+		
+		if(result == 1) {
+			// clsDTO에 cls_code 할당
+			clsDTO = clsDAO.selectClsAfterUpload(clsDTO);
+			
+			// 총 강의 차수에 맞게 classDetail 테이블에 데이터 생성
+			for(int i = 0; i < clsDTO.getCls_totlect(); i++){
+				clsDetailDTO.setMem_code(memDTO.getMem_code());
+				clsDetailDTO.setCls_code(clsDTO.getCls_code());
+				clsDetailDTO.setClsd_lect(i+1);
+				clsDetailDTO.setCls_totlect(clsDTO.getCls_totlect());
+				
+				int detailResult = clsDetailDAO.insertClsDetail(clsDetailDTO);
+				
+				if(detailResult == 1) {
+					continue;
+				}else {
+					// 데이터 생성 중 에러 발생 시 생성한거 전부 delete 후 db생성 실패 반환
+					int initDelResult = clsDetailDAO.initDelClsDetail(clsDetailDTO);
+					if(initDelResult == 1) {
+						System.out.println("DB에 임시 데이터 생성 중 에러가 발생하여 삭제했습니다. 강의번호: " + clsDTO.getCls_code());
+						return 0;
+					}else {
+						System.out.println("DB에 임시 데이터 생성 중 에러가 발생하여 삭제를 시도했지만 실패했습니다. 강의번호: " + clsDTO.getCls_code());
+						return 0;
+					}					
+				}
+			}
+			System.out.println("강의 업로드 및 임시 데이터 생성을 성공했습니다. 강의번호: " + clsDTO.getCls_code());
+			return result;
+		}else {
+			System.out.println("CLASSTBL에 업로드를 실패했습니다. 강의번호: " + clsDTO.getCls_code());
+			return result;
+		}
 	}
 	
 	// 강의 검색 메소드

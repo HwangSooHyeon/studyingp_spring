@@ -9,6 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 
 public class Utility {
+	
+	// 기본 생성자 생성 방지
+	private Utility() {
+		throw new AssertionError();
+	}
+	
 	public static ModelAndView direction(String url, Map<String, ?> params) {
 		
 		ModelAndView modelView = new ModelAndView();

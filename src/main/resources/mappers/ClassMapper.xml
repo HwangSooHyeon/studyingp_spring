@@ -131,14 +131,25 @@
 	
 	</select>
 	
+	<!-- 강의 조회 (강의명, 강사코드, 카테고리; 강의 업로드 직후 하나만 조회하기 위해 만듦) -->
+	<select id="selectClsAfterUpload" parameterType="com.busanit01.studyingp.dto.ClassDTO" resultType="com.busanit01.studyingp.dto.ClassDTO">
+		
+		SELECT
+			*
+		FROM
+			CLASSTBL
+		WHERE
+			CLS_CATEGORY = #{cls_category} AND CLS_NAME = #{cls_name} AND MEM_CODE = #{mem_code} AND CLS_DELETE = 1
+		
+	</select>
 	
 	<!-- 강의 개설 -->
 	<insert id="insertCls" parameterType="com.busanit01.studyingp.dto.ClassDTO">
 	
 		INSERT INTO
-			CLASSTBL (CLS_CATEGORY, CLS_NAME, MEM_CODE, CLS_PRICE, CLS_TIME, CLS_PERIOD, CLS_DELETE, CLS_CONTENT, CLS_IMG, CLS_URL) 
+			CLASSTBL (CLS_CATEGORY, CLS_NAME, MEM_CODE, CLS_PRICE, CLS_TIME, CLS_PERIOD, CLS_DELETE, CLS_CONTENT, CLS_IMG, CLS_URL, CLS_TOTLECT) 
 		VALUES
-			(#{cls_category}, #{cls_name}, #{mem_code}, #{cls_price}, #{cls_time}, DATE_ADD(NOW(), INTERVAL 6 MONTH), 1, #{cls_content}, #{cls_img}, #{cls_url})
+			(#{cls_category}, #{cls_name}, #{mem_code}, #{cls_price}, #{cls_time}, DATE_ADD(NOW(), INTERVAL 6 MONTH), 1, #{cls_content}, #{cls_img}, #{cls_url}, #{cls_totlect})
 	
 	</insert>
 	
@@ -156,7 +167,8 @@
 			CLS_PERIOD = #{cls_period},
 			CLS_CONTENT = #{cls_content},
 			CLS_IMG = #{cls_img},
-			CLS_URL = #{cls_url}
+			CLS_URL = #{cls_url},
+			CLS_TOTLECT = #{cls_totlect}
 		WHERE
 			CLS_CODE = #{cls_code}
 	

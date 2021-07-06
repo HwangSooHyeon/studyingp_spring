@@ -16,4 +16,10 @@ public interface ClassDetailDAO {
 	public ClassDetailDTO selectClsDetailClsNLect(ClassDetailDTO clsDetailDTO);
 	
 	public List<ClassDetailDTO> selectClsDetailMemCode(ClassDetailDTO clsDetailDTO);
+	
+	public int insertClsDetail(ClassDetailDTO clsDetailDTO);
+	public int updateClsDetail(ClassDetailDTO clsDetailDTO);
+	public int deleteClsDetail(ClassDetailDTO clsDetailDTO);
+	
+	public int initDelClsDetail(ClassDetailDTO clsDetailDTO);
 }

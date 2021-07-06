@@ -84,6 +84,10 @@ public class ClassDAOImpl implements ClassDAO{
 		params.put("cls_category", classDto.getCls_category());
 		
 		return sqlSession.selectList("mappers.ClassMapper.selectClsInstWithCat", params);
+	}
+
+	@Override
+	public ClassDTO selectClsAfterUpload(ClassDTO classDto) {
+		return sqlSession.selectOne("mappers.ClassMapper.selectClsAfterUpload", classDto);
 	}		
-	
 }

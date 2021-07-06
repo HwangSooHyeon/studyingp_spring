@@ -25,5 +25,6 @@ public class ClassDTO {
 	private String cls_content;
 	private String cls_img;
 	private String cls_url;
+	private int cls_totlect;
 }
 

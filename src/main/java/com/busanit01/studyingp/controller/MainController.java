@@ -26,7 +26,9 @@ public class MainController {
 	private ClassService classService;
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public ModelAndView main() {
+	public ModelAndView main(HttpServletRequest request, HttpServletResponse response) {
+		
+		System.out.println("업로드 경로: " + request.getSession().getServletContext().getRealPath("/") + "resources/img/");
 		
 		List<ClassDTO> classes = new ArrayList<ClassDTO>();
 		classes = classService.mainClsList();
