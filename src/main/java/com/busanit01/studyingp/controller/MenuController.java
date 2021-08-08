@@ -78,7 +78,7 @@ public class MenuController {
 		}		
 	}
 	
-	@RequestMapping(value = "/editClsInst", method = RequestMethod.POST)
+	@RequestMapping(value = "/editClsInst", method = {RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView editClsInst(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		MemberDTO currentUser = new MemberDTO();
