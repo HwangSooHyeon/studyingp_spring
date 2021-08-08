@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.busanit01.studyingp.dto.ClassDTO;
+import com.busanit01.studyingp.dto.MemberDTO;
 import com.busanit01.studyingp.service.ClassService;
 import com.busanit01.studyingp.util.Utility;
 
@@ -73,5 +76,27 @@ public class MenuController {
 			
 			return Utility.direction("searchclscategory", params1, params2);
 		}		
+	}
+	
+	@RequestMapping(value = "/editClsInst", method = RequestMethod.POST)
+	public ModelAndView editClsInst(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		MemberDTO currentUser = new MemberDTO();
+		
+		currentUser = (MemberDTO) session.getAttribute("currentUser");
+		
+		if(currentUser.getMem_id().equals("")) {
+			String msg = "로그인 후 진행바랍니다.";
+			Map<String, String> params = new HashMap<String, String>();
+			params.put("msg", msg);
+			return Utility.direction("redirectpage", params);
+		}else {
+			List<ClassDTO> clsList = new ArrayList<ClassDTO>();
+			clsList = classService.getClsByInstCode(currentUser);
+			Map<String, List<ClassDTO>> params = new HashMap<String, List<ClassDTO>>();
+			params.put("clsList", clsList);
+			
+			return Utility.direction("editclsinst", params);
+		}
 	}
 }

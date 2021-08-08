@@ -241,4 +241,11 @@ public class ClassService {
 		}
 	}
 	
+	// 강사 회원번호로 강의 리스트 얻어오는 메소드
+	public List<ClassDTO> getClsByInstCode(MemberDTO currentUser){
+		ClassDTO classDTO = new ClassDTO();
+		classDTO.setMem_code(currentUser.getMem_code());
+		return clsDAO.selectClsInstCode(classDTO);
+	}
+	
 }

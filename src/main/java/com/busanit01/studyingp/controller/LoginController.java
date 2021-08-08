@@ -41,6 +41,7 @@ public class LoginController {
 		user = memberService.signIn(user);
 		
 		if(user != null && pwdEncoder.matches(password, user.getMem_pw())) {
+			currentUser.setMem_code(user.getMem_code());
 			currentUser.setMem_id(user.getMem_id());
 			currentUser.setMem_name(user.getMem_name());
 			currentUser.setMem_access(user.getMem_access());
