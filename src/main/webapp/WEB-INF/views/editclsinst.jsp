@@ -39,7 +39,7 @@
 						</tr>
 					</thead>
 					<tbody>
-					<c:forEach var="item" items="${params.clsList}" begin="0" end="${fn:length(params.clsList}" step="1">
+					<c:forEach var="item" items="${params.clsList}" begin="0" end="${fn:length(params.clsList)}" step="1">
 						<tr style="border-bottom: 2px solid silver !important;">
 							<th scope="row" class="text-center">${item.cls_code}</th>
 							<th class="text-center">${item.cls_name}</th>
