@@ -44,7 +44,7 @@
 							<th scope="row" class="text-center">${item.cls_code}</th>
 							<th class="text-center">${item.cls_name}</th>
 							<th class="text-center">${item.cls_totlect}</th>
-							<th class="text-center"><a class="btn btn-primary" href="/editClsOut?cls_code=${item.cls_code}">개요 수정</a></th>
+							<th class="text-center"><a class="btn btn-secondary" href="/editClsOut?cls_code=${item.cls_code}">개요 수정</a></th>
 							<th class="text-center"><a class="btn btn-primary" href="/editClsDetail?cls_code=${item.cls_code}">상세 수정</a></th>
 						</tr>
 					</c:forEach>

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.busanit01.studyingp.dto.ClassDTO;
+import com.busanit01.studyingp.dto.ClassDetailDTO;
 import com.busanit01.studyingp.dto.MemberDTO;
 import com.busanit01.studyingp.service.ClassService;
 import com.busanit01.studyingp.util.Utility;
@@ -99,4 +100,5 @@ public class MenuController {
 			return Utility.direction("editclsinst", params);
 		}
 	}
+	
 }
